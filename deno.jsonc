@@ -1,0 +1,19 @@
+{
+  "name": "@ayuzaka/ddu-source-comments",
+  "version": "0.1.0",
+  "exports": {
+    "./ddu-kind-comments": "./denops/@ddu-kinds/comments.ts",
+    "./ddu-source-comments": "./denops/@ddu-sources/comments.ts"
+  },
+  "tasks": {
+    "test": "deno test --allow-all"
+  },
+  "imports": {
+    "@shougo/ddu-vim": "jsr:@shougo/ddu-vim@^11.1.0",
+    "@shougo/ddu-vim/types": "jsr:@shougo/ddu-vim@^11.1.0/types",
+    "@shougo/ddu-kind-file": "jsr:@shougo/ddu-kind-file@~1.0.0",
+    "@denops/core": "jsr:@denops/core@~7.0.0",
+    "@denops/std": "jsr:@denops/std@^8.2.0",
+    "@std/assert": "jsr:@std/assert@^1.0.0"
+  }
+}
