@@ -87,3 +87,40 @@ Deno.test("whenReadAllCalled_invokesLuaevalWithToplevelArgument", async () => {
   assertEquals(fakeDenops.calls[0].args[0], "require('config.comments_core').read_all(_A)");
   assertEquals(fakeDenops.calls[0].args[1], "/home/user/repo");
 });
+
+Deno.test("givenArrayDirectly_whenReadAllCalled_returnsArrayAsIs", async () => {
+  // Arrange
+  const rawComments: CommentData[] = [
+    { relpath: "a.ts", linenumber: 1, comment: "TODO" },
+    { relpath: "b.ts", linenumber: 2, comment: "FIXME" },
+  ];
+  const fakeDenops = new FakeDenops(rawComments);
+
+  // Act
+  const result = await readAll(fakeDenops, "/proj");
+
+  // Assert
+  assertEquals(result, rawComments);
+});
+
+Deno.test("givenUnexpectedObject_whenReadAllCalled_returnsEmptyArray", async () => {
+  // Arrange
+  const fakeDenops = new FakeDenops({ foo: "bar" });
+
+  // Act
+  const result = await readAll(fakeDenops, "/proj");
+
+  // Assert
+  assertEquals(result, []);
+});
+
+Deno.test("givenNull_whenReadAllCalled_returnsEmptyArray", async () => {
+  // Arrange
+  const fakeDenops = new FakeDenops(null);
+
+  // Act
+  const result = await readAll(fakeDenops, "/proj");
+
+  // Assert
+  assertEquals(result, []);
+});
