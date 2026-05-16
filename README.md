@@ -8,8 +8,6 @@ diff comments stored by `comments_core`.
 - [denops.vim](https://github.com/vim-denops/denops.vim)
 - [ddu.vim](https://github.com/Shougo/ddu.vim)
 - [ddu-kind-file](https://github.com/Shougo/ddu-kind-file)
-- [comments_core](https://github.com/ayuzaka/ayuzaka) (chezmoi dotfiles Lua
-  module)
 
 ## Installation
 
