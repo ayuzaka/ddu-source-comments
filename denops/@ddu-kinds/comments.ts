@@ -1,6 +1,6 @@
-import { BaseKind } from "@shougo/ddu-vim/kind";
-import type { ActionArguments } from "@shougo/ddu-vim/types";
-import { ActionFlags } from "@shougo/ddu-vim/types";
+import { BaseKind } from "jsr:@shougo/ddu-vim@~11.1.0/kind";
+import type { ActionArguments } from "jsr:@shougo/ddu-vim@~11.1.0/types";
+import { ActionFlags } from "jsr:@shougo/ddu-vim@~11.1.0/types";
 import type { ActionData } from "../ddu-source-comments/types.ts";
 
 type Params = Record<string, never>;
@@ -26,7 +26,7 @@ export class Kind extends BaseKind<Params> {
           const action = item.action as ActionData;
           await args.denops.call(
             "luaeval",
-            "require('diff_comments_core').delete_comment(_A[1], _A[2], _A[3])",
+            "require('config.comments_core').delete_comment(_A[1], _A[2], _A[3])",
             [action.toplevel, action.relpath, action.lineNr],
           );
         }

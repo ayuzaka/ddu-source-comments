@@ -1,13 +1,13 @@
 # ddu-source-comments
 
-A [ddu.vim](https://github.com/Shougo/ddu.vim) source that lists and operates on diff comments stored by `diff_comments_core`.
+A [ddu.vim](https://github.com/Shougo/ddu.vim) source that lists and operates on diff comments stored by `comments_core`.
 
 ## Requirements
 
 - [denops.vim](https://github.com/vim-denops/denops.vim)
 - [ddu.vim](https://github.com/Shougo/ddu.vim)
 - [ddu-kind-file](https://github.com/Shougo/ddu-kind-file)
-- [diff_comments_core](https://github.com/ayuzaka/ayuzaka) (chezmoi dotfiles Lua module)
+- [comments_core](https://github.com/ayuzaka/ayuzaka) (chezmoi dotfiles Lua module)
 
 ## Installation
 
