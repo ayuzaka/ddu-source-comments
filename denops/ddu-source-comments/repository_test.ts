@@ -84,7 +84,10 @@ Deno.test("whenReadAllCalled_invokesLuaevalWithToplevelArgument", async () => {
   // Assert
   assertEquals(fakeDenops.calls.length, 1);
   assertEquals(fakeDenops.calls[0].fn, "luaeval");
-  assertEquals(fakeDenops.calls[0].args[0], "require('config.comments_core').read_all(_A)");
+  assertEquals(
+    fakeDenops.calls[0].args[0],
+    "require('config.comments_core').read_all(_A)",
+  );
   assertEquals(fakeDenops.calls[0].args[1], "/home/user/repo");
 });
 
@@ -117,6 +120,55 @@ Deno.test("givenUnexpectedObject_whenReadAllCalled_returnsEmptyArray", async () 
 Deno.test("givenNull_whenReadAllCalled_returnsEmptyArray", async () => {
   // Arrange
   const fakeDenops = new FakeDenops(null);
+
+  // Act
+  const result = await readAll(fakeDenops, "/proj");
+
+  // Assert
+  assertEquals(result, []);
+});
+
+Deno.test("givenNestedObjectWithToplevel_whenReadAllCalled_returnsParsedComments", async () => {
+  // Arrange
+  const nestedResult = {
+    "/proj": {
+      "README.md": { "13": "Cline??" },
+      "src/main.ts": { "7": "あー" },
+    },
+  };
+  const fakeDenops = new FakeDenops(nestedResult);
+
+  // Act
+  const result = await readAll(fakeDenops, "/proj");
+
+  // Assert
+  assertEquals(result, [
+    { relpath: "README.md", linenumber: 13, comment: "Cline??" },
+    { relpath: "src/main.ts", linenumber: 7, comment: "あー" },
+  ]);
+});
+
+Deno.test("givenNestedObjectWithoutToplevel_whenReadAllCalled_returnsParsedComments", async () => {
+  // Arrange
+  const nestedResult = {
+    "README.md": { "1": "TODO" },
+    "src/main.ts": { "5": "FIXME" },
+  };
+  const fakeDenops = new FakeDenops(nestedResult);
+
+  // Act
+  const result = await readAll(fakeDenops, "/proj");
+
+  // Assert
+  assertEquals(result, [
+    { relpath: "README.md", linenumber: 1, comment: "TODO" },
+    { relpath: "src/main.ts", linenumber: 5, comment: "FIXME" },
+  ]);
+});
+
+Deno.test("givenEmptyNestedObject_whenReadAllCalled_returnsEmptyArray", async () => {
+  // Arrange
+  const fakeDenops = new FakeDenops({ "/proj": {} });
 
   // Act
   const result = await readAll(fakeDenops, "/proj");
