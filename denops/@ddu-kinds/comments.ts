@@ -7,6 +7,21 @@ type Params = Record<string, never>;
 
 export class Kind extends BaseKind<Params> {
   override actions = {
+    open: {
+      description: "Open the file at the comment location",
+      callback: async (
+        args: ActionArguments<Params>,
+      ): Promise<ActionFlags> => {
+        for (const item of args.items) {
+          const action = item.action as ActionData;
+          await args.denops.cmd(
+            `edit ${action.path} | call cursor(${action.lineNr}, ${action.col})`,
+          );
+        }
+
+        return ActionFlags.None;
+      },
+    },
     delete: {
       description: "Delete the selected comment(s)",
       callback: async (
