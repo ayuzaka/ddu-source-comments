@@ -1,13 +1,15 @@
 # ddu-source-comments
 
-A [ddu.vim](https://github.com/Shougo/ddu.vim) source that lists and operates on diff comments stored by `comments_core`.
+A [ddu.vim](https://github.com/Shougo/ddu.vim) source that lists and operates on
+diff comments stored by `comments_core`.
 
 ## Requirements
 
 - [denops.vim](https://github.com/vim-denops/denops.vim)
 - [ddu.vim](https://github.com/Shougo/ddu.vim)
 - [ddu-kind-file](https://github.com/Shougo/ddu-kind-file)
-- [comments_core](https://github.com/ayuzaka/ayuzaka) (chezmoi dotfiles Lua module)
+- [comments_core](https://github.com/ayuzaka/ayuzaka) (chezmoi dotfiles Lua
+  module)
 
 ## Installation
 
@@ -44,7 +46,7 @@ args.contextBuilder.patchLocal("comments", {
 ## Actions
 
 | Action   | Description                                          |
-|----------|------------------------------------------------------|
+| -------- | ---------------------------------------------------- |
 | `open`   | Jump to the file and line where the comment was made |
 | `delete` | Delete the selected comment(s) with confirmation     |
 
@@ -55,7 +57,8 @@ args.contextBuilder.patchLocal("comments", {
 - Shows comments within the current Git repository's toplevel
 - Display format: `relpath:linenumber │ comment first line` (80 chars max)
 - Full comment text is preserved in `word` for filtering
-- Fail-soft: returns an empty list with a console warning when the Lua core is unavailable
+- Fail-soft: returns an empty list with a console warning when the Lua core is
+  unavailable
 
 ## Development
 

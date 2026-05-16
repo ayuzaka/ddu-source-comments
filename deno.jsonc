@@ -7,5 +7,10 @@
   },
   "tasks": {
     "test": "deno test --allow-all"
+  },
+  "lint": {
+    "rules": {
+      "exclude": ["no-import-prefix"]
+    }
   }
 }

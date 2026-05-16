@@ -2,7 +2,11 @@ import type { CommentData, CommentItem } from "./types.ts";
 
 const DISPLAY_WIDTH = 80;
 
-function formatDisplay(relpath: string, linenumber: number, comment: string): string {
+function formatDisplay(
+  relpath: string,
+  linenumber: number,
+  comment: string,
+): string {
   const firstLine = comment.split("\n")[0];
   const prefix = `${relpath}:${linenumber} │ `;
   const maxCommentLength = DISPLAY_WIDTH - prefix.length - 3; // 3 for "..."
@@ -20,7 +24,11 @@ export function formatItems(
 ): CommentItem[] {
   return comments.map((comment) => ({
     word: `${comment.relpath}:${comment.linenumber} │ ${comment.comment}`,
-    display: formatDisplay(comment.relpath, comment.linenumber, comment.comment),
+    display: formatDisplay(
+      comment.relpath,
+      comment.linenumber,
+      comment.comment,
+    ),
     action: {
       path: `${toplevel}/${comment.relpath}`,
       lineNr: comment.linenumber,

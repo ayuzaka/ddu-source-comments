@@ -9,7 +9,9 @@ export class Kind extends BaseKind<Params> {
   override actions = {
     delete: {
       description: "Delete the selected comment(s)",
-      callback: async (args: ActionArguments<Params>) => {
+      callback: async (
+        args: ActionArguments<Params>,
+      ): Promise<ActionFlags> => {
         const count = args.items.length;
         const confirmed = await args.denops.call(
           "confirm",
