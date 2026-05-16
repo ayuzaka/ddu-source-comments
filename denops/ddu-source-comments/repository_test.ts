@@ -1,6 +1,6 @@
-import { assertEquals } from "@std/assert";
+import { assertEquals } from "jsr:@std/assert@1";
 import { readAll } from "./repository.ts";
-import type { Denops } from "@denops/core";
+import type { Denops } from "jsr:@denops/core@~7.0.0";
 import type { CommentData } from "./types.ts";
 
 class FakeDenops implements Denops {
@@ -84,6 +84,6 @@ Deno.test("whenReadAllCalled_invokesLuaevalWithToplevelArgument", async () => {
   // Assert
   assertEquals(fakeDenops.calls.length, 1);
   assertEquals(fakeDenops.calls[0].fn, "luaeval");
-  assertEquals(fakeDenops.calls[0].args[0], "require('diff_comments_core').read_all(_A)");
+  assertEquals(fakeDenops.calls[0].args[0], "require('config.comments_core').read_all(_A)");
   assertEquals(fakeDenops.calls[0].args[1], "/home/user/repo");
 });

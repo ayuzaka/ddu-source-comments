@@ -1,4 +1,4 @@
-import type { Item } from "@shougo/ddu-vim/types";
+import type { Item } from "jsr:@shougo/ddu-vim@~11.1.0/types";
 
 /**
  * Raw comment data returned from the Lua core.

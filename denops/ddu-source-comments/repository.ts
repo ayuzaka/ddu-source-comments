@@ -1,4 +1,4 @@
-import type { Denops } from "@denops/core";
+import type { Denops } from "jsr:@denops/core@~7.0.0";
 import type { CommentData } from "./types.ts";
 
 export async function readAll(
@@ -7,7 +7,7 @@ export async function readAll(
 ): Promise<CommentData[]> {
   const result = await denops.call(
     "luaeval",
-    "require('diff_comments_core').read_all(_A)",
+    "require('config.comments_core').read_all(_A)",
     toplevel,
   );
   return JSON.parse(result as string) as CommentData[];

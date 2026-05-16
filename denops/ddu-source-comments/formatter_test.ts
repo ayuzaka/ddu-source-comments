@@ -1,4 +1,4 @@
-import { assertEquals } from "@std/assert";
+import { assertEquals } from "jsr:@std/assert@1";
 import { formatItems } from "./formatter.ts";
 import type { CommentData } from "./types.ts";
 

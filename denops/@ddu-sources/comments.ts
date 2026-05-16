@@ -1,6 +1,6 @@
-import { BaseSource } from "@shougo/ddu-vim/source";
-import type { GatherArguments } from "@shougo/ddu-vim/source";
-import type { Item } from "@shougo/ddu-vim/types";
+import { BaseSource } from "jsr:@shougo/ddu-vim@~11.1.0/source";
+import type { GatherArguments } from "jsr:@shougo/ddu-vim@~11.1.0/source";
+import type { Item } from "jsr:@shougo/ddu-vim@~11.1.0/types";
 import type { ActionData } from "../ddu-source-comments/types.ts";
 import { readAll } from "../ddu-source-comments/repository.ts";
 import { formatItems } from "../ddu-source-comments/formatter.ts";
