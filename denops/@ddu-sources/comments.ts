@@ -35,8 +35,9 @@ export class Source extends BaseSource<Params, ActionData> {
         }
 
         try {
+          const displayWidth = await args.denops.eval("&columns") as number;
           const comments = await readAll(args.denops, toplevel);
-          const items = formatItems(comments, toplevel);
+          const items = formatItems(comments, toplevel, displayWidth);
           controller.enqueue(items);
         } catch (error) {
           console.warn(

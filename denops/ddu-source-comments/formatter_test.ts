@@ -40,7 +40,7 @@ Deno.test("givenMultilineComment_whenFormatted_displayShowsOnlyFirstLine", () =>
   );
 });
 
-Deno.test("givenLongFirstLine_whenFormatted_displayTruncatesTo80CharsWithEllipsis", () => {
+Deno.test("givenLongFirstLineWithoutDisplayWidth_whenFormatted_displayIsNotTruncated", () => {
   // Arrange
   const longLine = "a".repeat(100);
   const comments: CommentData[] = [
@@ -57,8 +57,49 @@ Deno.test("givenLongFirstLine_whenFormatted_displayTruncatesTo80CharsWithEllipsi
 
   // Assert
   const prefix = "src/main.ts:5 │ ";
-  const expectedDisplay = prefix + "a".repeat(80 - prefix.length - 3) + "...";
+  assertEquals(items[0].display, prefix + longLine);
+});
+
+Deno.test("givenLongFirstLineWithDisplayWidth_whenFormatted_displayTruncatesToFitWidth", () => {
+  // Arrange
+  const longLine = "a".repeat(100);
+  const comments: CommentData[] = [
+    {
+      relpath: "src/main.ts",
+      linenumber: 5,
+      comment: longLine,
+    },
+  ];
+  const toplevel = "/proj";
+  const displayWidth = 40;
+
+  // Act
+  const items = formatItems(comments, toplevel, displayWidth);
+
+  // Assert
+  const prefix = "src/main.ts:5 │ ";
+  const expectedDisplay = prefix +
+    "a".repeat(displayWidth - prefix.length - 3) +
+    "...";
   assertEquals(items[0].display, expectedDisplay);
+});
+
+Deno.test("givenWideCharactersWithDisplayWidth_whenFormatted_displayTruncatesByCellWidth", () => {
+  // Arrange
+  const comments: CommentData[] = [
+    {
+      relpath: "src/main.ts",
+      linenumber: 5,
+      comment: "あ".repeat(20),
+    },
+  ];
+  const toplevel = "/proj";
+
+  // Act
+  const items = formatItems(comments, toplevel, 24);
+
+  // Assert
+  assertEquals(items[0].display, "src/main.ts:5 │ ああ...");
 });
 
 Deno.test("givenMultipleComments_whenFormatted_returnsItemsInOrder", () => {

@@ -53,7 +53,8 @@ args.contextBuilder.patchLocal("comments", {
 ## Features
 
 - Shows comments within the current Git repository's toplevel
-- Display format: `relpath:linenumber │ comment first line` (80 chars max)
+- Display format: `relpath:linenumber │ comment first line` (truncated to fit
+  the display width)
 - Full comment text is preserved in `word` for filtering
 - Fail-soft: returns an empty list with a console warning when the Lua core is
   unavailable
